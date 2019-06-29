@@ -1,0 +1,25 @@
+version: "3"
+services:
+  web:
+    container_name: react-frontend-app
+    image: niravbhimani53/testapp
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app 
+
+
+# Volumes 
+# /app/node_modules is added because We dont want node_modules to be mapped outside container
+# .:/app -> map . which is local machine directory to inside container /app
+# outside_container : inside_container
+# Above is done to make sure that changes made locally updated inside container by mapping
+# But the changes made on local machine wont be updated in docker container
+
+
+# To execute live test locally ... But this is not good approach
+# Run docker image and then open another terminal tab and run `docker run -it image_id npm run test`
